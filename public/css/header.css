@@ -166,9 +166,10 @@
     @media only screen and (max-width: 370px) {
         #main{
             margin:20px 0 !important;
+            
         }
     }
-    #main{margin:20px;}
+    #main{margin:20px;min-height: 604px;}
     .arrow-down{
         border: solid black;
         border-width: 0 3px 3px 0;

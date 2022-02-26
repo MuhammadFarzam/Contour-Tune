@@ -6,28 +6,28 @@
     <div class="toggle-div" style="flex-grow:1;">
         <div class="toggle-name">Name</div>
         <label class="switch">
-            <input class="name_check" data-check="des" name="name" type="checkbox">
+            <input class="name_check_des" data-check="des" name="name" type="checkbox">
             <span class="slider round"></span>
         </label>
     </div>
     <div class="toggle-div" style="flex-grow:1;">
         <div class="toggle-name">Impression</div>
         <label class="switch">
-            <input class="impr_check" data-check="des" name="impressions" type="checkbox">
+            <input class="impr_check_des" data-check="des" name="impressions" type="checkbox">
             <span class="slider round"></span>
         </label>
     </div>
     <div class="toggle-div" style="flex-grow:1;">
         <div class="toggle-name">Conversions</div>
         <label class="switch">
-            <input class="conver_check" data-check="des" name="conversions"  type="checkbox">
+            <input class="conver_check_des" data-check="des" name="conversions"  type="checkbox">
             <span class="slider round"></span>
         </label>
     </div>
     <div class="toggle-div" style="flex-grow:1;">
         <div class="toggle-name">Revenue</div>
         <label class="switch">
-            <input class="rev_check" data-check="des" name="revenue" type="checkbox">
+            <input class="rev_check_des" data-check="des" name="revenue" type="checkbox">
             <span class="slider round"></span>
         </label>
     </div>
@@ -40,7 +40,7 @@
             <div class="toggle-div" style="flex-grow:1;">
                 <div class="toggle-name">Name</div>
                 <label class="switch">
-                <input class="name_check" data-check="mob" name="name" type="checkbox">
+                <input class="name_check_mob" data-check="mob" name="name" type="checkbox">
                 <span class="slider round"></span>
                 </label>
             </div>
@@ -49,7 +49,7 @@
             <div class="toggle-div" style="flex-grow:1;">
                 <div class="toggle-name">Impression</div>
                 <label class="switch">
-                <input class="impr_check" data-check="mob" name="impressions" type="checkbox">
+                <input class="impr_check_mob" data-check="mob" name="impressions" type="checkbox">
                 <span class="slider round"></span>
                 </label>
             </div>
@@ -58,7 +58,7 @@
             <div class="toggle-div" style="flex-grow:1;">
                 <div class="toggle-name">Conversions</div>
                 <label class="switch">
-                <input class="conver_check" data-check="mob" name="conversions" type="checkbox">
+                <input class="conver_check_mob" data-check="mob" name="conversions" type="checkbox">
                 <span class="slider round"></span>
                 </label>
             </div>
@@ -67,7 +67,7 @@
             <div class="toggle-div" style="flex-grow:1;">
                 <div class="toggle-name">Revenue</div>
                 <label class="switch">
-                <input class="rev_check" data-check="mob" name="revenue" type="checkbox">
+                <input class="rev_check_mob" data-check="mob" name="revenue" type="checkbox">
                 <span class="slider round"></span>
                 </label>
             </div>

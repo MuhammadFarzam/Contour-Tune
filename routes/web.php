@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',function(){
+    return redirect('/dashboard');
+});
 
 //This is the route for view
 Route::get('/dashboard', [UserDashboardController::class,'getUserInformation']);

@@ -99,48 +99,65 @@
         }(jQuery));
 
 
-
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                $('#cover-spin').hide();
+            }
+        }
+        console.log(document.readyState);
         $('document').ready(function(){
-  
+            $('#cover-spin').show(0);
             var userData = <?php echo json_encode($data['usersCollection'],true)?>;
             var userLogsData = <?php echo json_encode($data['statsCollection'],true)?>;
  
             $.fn.renderGraphForUser(userData,userLogsData);
-
-            $('.name_check').change(function() {
-                if ($('.name_check').is(":checked"))
+            //$('#cover-spin').hide();
+            $('.name_check_des,.name_check_mob').change(function() {
+                if ($(this).is(":checked"))
                 {
                     let nameChk = $(this).attr("name");
-                    $('.conver_check,.impr_check,.rev_check').prop('checked',false);
+                    $('.name_check_des,.name_check_mob').prop('checked',true);
+                    $('.conver_check_des,.impr_check_des,.rev_check_des,.conver_check_mob,.impr_check_mob,.rev_check_mob').prop('checked',false);
                     $.fn.AjaxCallForUser('name');
+                }else{
+                    $('.name_check_des,.name_check_mob').prop('checked',false);
                 }
             });
 
-            $('.conver_check').change(function() {
-                if ($('.conver_check').is(":checked"))
+            $('.conver_check_des,.conver_check_mob').change(function() {
+                if ($(this).is(":checked"))
                 {
                     let nameChk = $(this).attr("name");
-                    $('.name_check,.impr_check,.rev_check').prop('checked',false);
+                    $('.conver_check_des,.conver_check_mob').prop('checked',true);
+                    $('.name_check_des,.impr_check_des,.rev_check_des,.name_check_mob,.impr_check_mob,.rev_check_mob').prop('checked',false);
                     $.fn.AjaxCallForUser('conversions');
+                }else{
+                    $('.conver_check_des,.conver_check_mob').prop('checked',false);
                 }
             });
 
-            $('.impr_check').change(function() {
-                if ($('.impr_check').is(":checked"))
+            $('.impr_check_des,.impr_check_mob').change(function() {
+                if ($(this).is(":checked"))
                 {
                     let nameChk = $(this).attr("name");
-                    $('.conver_check,.name_check,.rev_check').prop('checked',false);
+                    $('.impr_check_des,.impr_check_mob').prop('checked',true);
+                    $('.conver_check_des,.name_check_des,.rev_check_des,.conver_check_mob,.name_check_mob,.rev_check_mob').prop('checked',false);
                     $.fn.AjaxCallForUser('impressions');
                     
+                }else{
+                    $('.impr_check_des,.impr_check_mob').prop('checked',false);
                 }
             });
 
-            $('.rev_check').change(function() {
-                if ($('.rev_check').is(":checked"))
+            $('.rev_check_des,.rev_check_mob').change(function() {
+                if ($(this).is(":checked"))
                 {
                     let nameChk = $(this).attr("name");
-                    $('.conver_check,.impr_check,.name_check').prop('checked',false);
+                    $('.rev_check_des,.rev_check_mob').prop('checked',true);
+                    $('.conver_check_des,.impr_check_des,.name_check_des,.conver_check_mob,.impr_check_mob,.name_check_mob').prop('checked',false);
                     $.fn.AjaxCallForUser('revenue');
+                }else{
+                    $('.rev_check_des,.rev_check_mob').prop('checked',false);
                 }
             });
 
@@ -155,37 +172,42 @@
 
                         success: function(resp){
                             $('#cover-spin').hide();
-                            let html= '';
-                            $.each(resp['data']['usersCollection'],function(key, value){
-                                let date = new Date(resp['data']['statsCollection']['user'+value['id']+'key']['mindate']);
-                                let date2 = new Date(resp['data']['statsCollection']['user'+value['id']+'key']['maxdate']);
-                                console.log(date);
-                                console.log('sa',resp['data']['statsCollection']['user'+value['id']+'key']['mindate']);
-                                html += `<div class="customer-card">
-                                            <div class="first-row">
-                                                <div><img src="" alt="N" class="avatar"></div>
-                                                <div style="margin-left:8px;">
-                                                    <div class="nam">${value['name']}</div>
-                                                    <div class="prof">${value['occupation']}</div>
+                            var html= '';
+                            if(!$.isEmptyObject(resp['data']['statsCollection']) && !$.isEmptyObject(resp['data']['usersCollection'])){  
+                                $.each(resp['data']['usersCollection'],function(key, value){
+                                    let date = new Date(resp['data']['statsCollection']['user'+value['id']+'key']['mindate']);
+                                    let date2 = new Date(resp['data']['statsCollection']['user'+value['id']+'key']['maxdate']);
+                                    console.log(date);
+                                    console.log('sa',resp['data']['statsCollection']['user'+value['id']+'key']['mindate']);
+                                    html += `<div class="customer-card">
+                                                <div class="first-row">
+                                                    <div><img src="" alt="N" class="avatar"></div>
+                                                    <div style="margin-left:8px;">
+                                                        <div class="nam">${value['name']}</div>
+                                                        <div class="prof">${value['occupation']}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div class="second-row">
-                                                <div class="card-graph">
-                                                    <div id="graph_container_${value['id']}" class="graph">Graph</div>
-                                                    <div class="conver">Conversion  ${(date.getMonth()+1)+'/'+date.getDate()} - ${(date2.getMonth()+1)+'/'+date2.getDate()} </div>
-                                                </div>
-                                                <div class="user-detail">
-                                                    <div class="font-weight-text">${resp['data']['statsCollection']['user'+value['id']+'key']['impressions']}</div>
-                                                    <div class="font-weight-heading">impressions</div>
-                                                    <div class="font-weight-text">${resp['data']['statsCollection']['user'+value['id']+'key']['conversions']}</div>
-                                                    <div class="font-weight-heading">conversions</div>
-                                                    <div class="font-weight-text">$${resp['data']['statsCollection']['user'+value['id']+'key']['revenue'].toFixed(2)}</div>
-                                                    <div class="font-weight-heading">revenue</div>
-                                                </div>
-                                            </div> 
-                                        </div>`;
-                            });
+                                                
+                                                <div class="second-row">
+                                                    <div class="card-graph">
+                                                        <div id="graph_container_${value['id']}" class="graph">Graph</div>
+                                                        <div class="conver">Conversion  ${(date.getMonth()+1)+'/'+date.getDate()} - ${(date2.getMonth()+1)+'/'+date2.getDate()} </div>
+                                                    </div>
+                                                    <div class="user-detail">
+                                                        <div class="font-weight-text">${resp['data']['statsCollection']['user'+value['id']+'key']['impressions']}</div>
+                                                        <div class="font-weight-heading">impressions</div>
+                                                        <div class="font-weight-text">${resp['data']['statsCollection']['user'+value['id']+'key']['conversions']}</div>
+                                                        <div class="font-weight-heading">conversions</div>
+                                                        <div class="font-weight-text">$${resp['data']['statsCollection']['user'+value['id']+'key']['revenue'].toFixed(2)}</div>
+                                                        <div class="font-weight-heading">revenue</div>
+                                                    </div>
+                                                </div> 
+                                            </div>`;
+                                });
+                            }else{
+                                html = `<div style="text-align:center;margin:38vh auto;">No Records Found<div>`;
+                            }
+                            
                             $('.grid-container').html(html);
                             $('#cover-spin').hide();
                             $.fn.renderGraphForUser(resp['data']['usersCollection'],resp['data']['statsCollection']);

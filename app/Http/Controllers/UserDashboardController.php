@@ -50,6 +50,7 @@ class UserDashboardController extends Controller
             return response()->json(['data' => ['usersCollection' => $userCollection, 'statsCollection' => $this->userRepo->OrderByRevenue()]]);
         }
        
+        return response()->json(['data' => ['usersCollection' => [], 'statsCollection' => []],'ErrorMessage' => "Please apply respective filter"]);
     }
 
 }
