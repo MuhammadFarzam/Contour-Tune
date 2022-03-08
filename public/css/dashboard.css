@@ -92,3 +92,13 @@
       ::-webkit-scrollbar-track {
           padding-left: 10px;
       }
+
+    .alternate-image{
+        background: lightblue;
+        text-align: center;
+        padding: 8px;
+        vertical-align: middle;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }

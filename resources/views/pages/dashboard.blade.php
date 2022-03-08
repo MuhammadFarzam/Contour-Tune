@@ -15,7 +15,11 @@
         @foreach($data['usersCollection'] as $key => $value)
             <div class="customer-card">
                 <div class="first-row">
+                    @if(!empty($value['avatar']))
                     <div><img src="{{ $value['avatar']}}"  data-id="{{$value['id']}}" alt="{{strtoupper(substr($value['name'], 0, 1))}}" class="avatar"></div>    
+                    @else
+                    <div class="alternate-image">{{strtoupper(substr($value['name'], 0, 1))}}</div>
+                    @endIf                    
                     <div style="margin-left:8px;">
                         <div class="nam">{{ $value['name'] }}</div>
                         <div class="prof">{{ $value['occupation'] }}</div>
@@ -180,9 +184,13 @@
                                     console.log(date);
                                     console.log('sa',resp['data']['statsCollection']['user'+value['id']+'key']['mindate']);
                                     html += `<div class="customer-card">
-                                                <div class="first-row">
-                                                    <div><img src="" alt="N" class="avatar"></div>
-                                                    <div style="margin-left:8px;">
+                                                <div class="first-row">`;
+                                                if(value['avatar'] != ""){
+                                                html += `<div><img src=${value['avatar']} alt="${value['name'].substring(0, 1).toUpperCase()}" class="avatar"></div>`
+                                                }else{
+                                                html += `<div class="alternate-image">${value['name'].substring(0, 1).toUpperCase()}</div>`
+                                                }    
+                                                html += `<div style="margin-left:8px;">
                                                         <div class="nam">${value['name']}</div>
                                                         <div class="prof">${value['occupation']}</div>
                                                     </div>
